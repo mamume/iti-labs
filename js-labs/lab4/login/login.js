@@ -1,12 +1,14 @@
 function login() {
-    const username = document.querySelector('#username').value
-    const password = document.querySelector('#password').value
+    const username = document.querySelector('#username')
+    const password = document.querySelector('#password')
 
-    if (username === 'admin' && password === '123') {
-        document.querySelector('#alert-message').innerText = 'Welcome'
+    if (username.value === 'admin' && password.value === '123') {
+        document.querySelector('#alert-message').innerText = 'Logged In'
         document.querySelector('table').hidden = true
     } else {
         document.querySelector('#alert-message').innerText = 'Not Registered'
+        username.value = ''
+        password.value = ''
     }
 }
 

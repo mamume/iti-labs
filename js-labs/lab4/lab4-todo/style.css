@@ -32,3 +32,8 @@ li {
 form {
   margin: 0 auto;
 }
+
+#new-todo,
+#add-btn {
+  height: 20px;
+}
