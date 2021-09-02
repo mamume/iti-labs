@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="todo.js"></script>
 
     <title>Todo</title>
 </head>
@@ -13,14 +14,23 @@
 <body>
     <div class='container'>
         <ul id='todo-list'>
-            <li>Dump Data</li>
-            <li>Dump Data</li>
+            <!-- <li>
+                <input type="checkbox" name="" id="">
+                Dump Data
+                <button>X</button>
+            </li>
+            <li>
+                <input type="checkbox" name="" id="">
+                Dump Data
+                <button>X</button>
+            </li> -->
+            <li>
+                <i>Enter a new Todo</i>
+            </li>
         </ul>
         <hr />
-        <form>
-            <label for='new-todo'>Add Todo</label>
-            <input type="text" for='new-todo'>
-        </form>
+        <input type="text" placeholder="Todo" id='new-todo'>
+        <button id='add-btn'>Add Todo</button>
     </div>
 </body>
 
