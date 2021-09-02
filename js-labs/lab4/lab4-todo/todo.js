@@ -25,7 +25,7 @@ function displayTodos() {
     todoListElement.innerHTML = ''
 
     if (todos.length === 0)
-        todoListElement.innerHTML = '<li>Enter a new Todo</li>'
+        todoListElement.innerHTML = '<li><i>Enter a new Todo</i></li>'
 
     todos.forEach(todo => {
         const checkbox = document.createElement('input')
