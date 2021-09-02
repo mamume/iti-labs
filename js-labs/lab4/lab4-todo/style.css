@@ -1,0 +1,33 @@
+.container {
+  background-color: lightgrey;
+  width: 500px;
+  min-height: 400px;
+  margin: 50px auto;
+  border-radius: 7px;
+  padding: 20px 40px;
+  font-family: sans-serif;
+}
+
+#todo-list {
+  /* margin: 20px; */
+  padding: 0px;
+  list-style: none;
+  border: 1px solid;
+  border-radius: 7px;
+  background-color: white;
+}
+
+hr {
+  margin: 40px 0;
+}
+
+li {
+  margin: 0px 10px;
+  padding: 15px 10px;
+  border-bottom: 1px solid;
+  border-color: darkgray;
+}
+
+form {
+  margin: 0 auto;
+}
