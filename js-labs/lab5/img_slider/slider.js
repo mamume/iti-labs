@@ -17,6 +17,7 @@ function mvRight() {
     const newIndex = end === 5 ? 0 : end + 1;
     const newImg = document.querySelector(`#${imgsSrcs[newIndex]}`);
 
+    console.log(rightImg, middleImg, leftImg, newImg);
 
     leftImg.style.display = 'none';
 
@@ -24,18 +25,19 @@ function mvRight() {
     middleImg.style.order = '0';
 
     rightImg.style.height = '400px';
-    leftImg.style.order = '1';
+    rightImg.style.order = '1';
 
     newImg.style.display = 'initial';
     newImg.style.order = '2';
 
-    start = middleImg;
+    start = middleIndex;
     end = newIndex;
 }
 
 function mvLeft() {
 
     const rightImg = document.querySelector(`#${imgsSrcs[end]}`);
+
     const middleIndex = start === 5 ? 0 : start + 1;
     const middleImg = document.querySelector(`#img-${middleIndex}`);
 
@@ -56,7 +58,7 @@ function mvLeft() {
     newImg.style.display = 'initial';
     newImg.style.order = '0';
 
-    end = end === 0 ? 5 : end - 1;
+    end = middleIndex;
     start = newIndex;
 }
 

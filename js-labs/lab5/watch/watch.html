@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="watch.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="watch">
+            <div id="days">
+                <span class="day">MON</span>
+                <span class="day">TUE</span>
+                <span class="day">WED</span>
+                <span class="day">THU</span>
+                <span class="day">FRI</span>
+                <span class="day">SAT</span>
+                <span class="day">SUN</span>
+            </div>
+            <div id='time'></div>
+        </div>
+    </div>
+
+    <div id="alarm">
+        <center>
+            <div id='alarm-head'>SET ALARM AFTER</div>
+
+            <div id='alarm-container'>
+
+                <div class='alarm-setter'>
+                    <div>HOURS</div>
+                    <input type="text" name="" id="hrs" value="0">
+                </div>
+
+                <div class='alarm-setter'>
+                    <div>MINUTES</div>
+                    <input type="text" name="" id="mins" value="0">
+                </div class='alarm-setter'>
+
+                <div class='alarm-setter'>
+                    <div>SECONDS</div>
+                    <input type="text" name="" id="secs" value="0">
+                </div>
+            </div>
+
+            <div id="btns">
+                <button id="set-btn">Set</button>
+                <button id='clear-btn'>Clear</button>
+            </div>
+        </center>
+    </div>
+</body>
+
+</html>
