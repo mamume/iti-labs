@@ -1,3 +1,25 @@
 body {
   font-family: sans-serif;
 }
+
+#slider {
+  display: flex;
+  justify-content: center;
+}
+
+#img-2 {
+  height: 400px;
+}
+
+#left-btn,
+#right-btn {
+  height: 50px;
+  align-self: center;
+  border-radius: 50%;
+  width: 50px;
+  background-color: rgba(0, 0, 0, 0.671);
+  color: white;
+  /* font-weight: bolder; */
+  font-size: larger;
+  opacity: 70%;
+}
