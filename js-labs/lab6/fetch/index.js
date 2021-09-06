@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(obj.data);
             const data = obj.data;
 
-            const profiles = document.querySelector('#profiles')
+            const profiles = document.querySelector('#profiles');
 
             data.forEach(user => {
                 const email = document.createElement('div');
