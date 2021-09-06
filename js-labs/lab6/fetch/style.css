@@ -1,0 +1,16 @@
+#profiles {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.profile {
+  /* flex: 1 0 33%; */
+  margin-bottom: 50px;
+  /* justify-self: center; */
+}
+
+/* .img {
+  justify-self: center;
+} */

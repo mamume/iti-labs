@@ -45,11 +45,14 @@ function login() {
                 if (data.token) {
                     alertMessage.innerHTML = 'Successful Login!';
                     alertMessage.style.color = 'green';
+                    setTimeout(() => (location.href = '../fetch/index.html'), 3000);
+
                 }
                 else {
                     alertMessage.style.color = 'red';
                     alertMessage.innerHTML = data.error;
                 }
+
             });
     }
 }
