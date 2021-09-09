@@ -14,6 +14,12 @@ class Shape {
         Type: ${this.constructor.name}
         `);
     }
+
+    // Dummy Method
+    getCircumference() { return 0; }
+
+    // Dummy Methods
+    getArea() { return 0; }
 }
 
 // Rectangle class ia a child of Shape class
@@ -118,6 +124,9 @@ class DrawArea {
 }
 
 const shapes = new DrawArea();
+
+const shape = new Shape();
+shapes.add(shape);
 
 const rectangle = new Rectangle(10, 5);
 // rectangle.log();
