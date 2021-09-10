@@ -16,9 +16,14 @@ function customPrompt(msg) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function openPrompt() {
+    document.querySelector('#prompt').style.display = 'block';
     let username = await customPrompt('Your Name please?');
 
-    document.querySelector('#username').innerText = username ? `, ${username}` : ', Friend';
+    document.querySelector('#username').innerText = username ? `Hello, ${username}` : 'Hello, Friend';
     document.querySelector('#prompt').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#prompt-btn').addEventListener('click', openPrompt);
 });
