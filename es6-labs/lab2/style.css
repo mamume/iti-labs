@@ -1,0 +1,37 @@
+#prompt {
+  background-color: rgba(119, 198, 200, 0.747);
+  border: 1px solid black;
+  border-radius: 7px;
+  padding: 20px;
+  width: 300px;
+  font-family: sans-serif;
+}
+
+input {
+  margin: 10px;
+  font-size: 15px;
+  width: 250px;
+  padding: 5px;
+  border-color: gainsboro;
+  border-width: 1px;
+}
+
+#cancel-btn,
+#ok-btn {
+  color: white;
+  border-radius: 3px;
+  padding: 5px;
+  font-weight: bold;
+}
+
+#cancel-btn {
+  background-color: orangered;
+}
+
+#ok-btn {
+  background-color: grey;
+}
+
+#prompt-q {
+  font-size: larger;
+}
