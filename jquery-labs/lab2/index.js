@@ -10,7 +10,7 @@ $(() => {
 
     // Assign src for slider images using window width and height
     $('.img-slider').each((index, img) => {
-        $(img).attr("src", `https://picsum.photos/seed/${getRandomInt()}/${window.innerWidth}/${window.innerHeight - nav.outerHeight()}`)
+        $(img).attr("src", `https://picsum.photos/seed/${getRandomInt()}/${Math.round(window.innerWidth)}/${Math.round(window.innerHeight - nav.outerHeight())}`)
     })
 
     // Create random image cards, the number of images equals the number of iterations
