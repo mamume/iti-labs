@@ -25,7 +25,7 @@ with open(filename, 'r') as f:
 
 # Open popular_words.txt with write
 with open('popular_words.txt', 'w') as f:
-    # Loop for 20 times to get the top 5 results
+    # Loop for 20 times to get the top 20 results
     for i in range(20):
         # Get the word with max count
         max_word = max(words_count, key=words_count.get)
