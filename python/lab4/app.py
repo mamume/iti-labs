@@ -1,4 +1,5 @@
-from Company import Employee, Manager, Department
+from Employee import Employee, Manager
+from Department import Department
 from Database import Database
 import yaml
 
