@@ -1,46 +1,63 @@
-from uuid import uuid1
+# from shortuuid import uuid
 from Database import Database
+from uuid import uuid1
 
 
 class Employee:
-    # TODO: populate the list with data
     employees = []
 
-    def __init__(self, fname, lname, age, dept_id, salary):
-        self.id = uuid1().hex
+    def __init__(self, fname, lname, age, salary, dept_id, managed_id, id=None):
+        self.id = id if id else uuid1().hex[:8]
         self.fname = fname
         self.lname = lname
         self.age = age
         self.dept_id = dept_id
         self.salary = salary
+        self.managed_id = managed_id
 
-        # TODO: insert element into database
         department_found = Department.department_found(dept_id)
 
         if department_found:
-            inserted = Database.insert_employee(
-                self.id,
-                self.fname,
-                self.lname,
-                self.age,
-                self.dept_id,
-                self.salary
-            )
-
-            if inserted:
-                Employee.employees.append(self)
-                print("Employee is inserted successfully!")
+            Employee.employees.append(self)
         else:
-            print("Employee id is not found!")
+            raise Exception("Department id is not found!")
 
     def __str__(self):
         return f"""
-            ID:         {self.id}
-            Name:       {self.fname} {self.lname}
-            Age:        {self.age}
-            Department: {self.dept_id}
-            Salary:     {self.salary}
+            ID:             {self.id}
+            Name:           {self.fname} {self.lname}
+            Age:            {self.age}
+            Department ID:  {self.dept_id}
+            Salary:         {self.salary}
         """
+
+    @staticmethod
+    def load_data():
+        employees_data = Database.get_all_employees()
+
+        for emp in employees_data:
+            if emp[6]:
+                Manager(
+                    id=emp[0],
+                    fname=emp[1],
+                    lname=emp[2],
+                    age=emp[3],
+                    salary=emp[4],
+                    dept_id=emp[5],
+                    managed_id=emp[6]
+                )
+            else:
+                Employee(
+                    id=emp[0],
+                    fname=emp[1],
+                    lname=emp[2],
+                    age=emp[3],
+                    salary=emp[4],
+                    dept_id=emp[5],
+                    managed_id=emp[6]
+                )
+
+        print("Employees Data loaded Successfully!")
 
     @staticmethod
     def find_emp_index(id):
@@ -48,44 +65,44 @@ class Employee:
             if Employee.employees[i].id == id:
                 return i
 
-        return None
+        return False
 
     @staticmethod
     def transfer(emp_id, new_dept_id):
-        emp_found = Employee.employee_found(emp_id)
+        employee_found = Employee.employee_found(emp_id)
         dept_found = Department.department_found(new_dept_id)
 
-        if emp_found and dept_found:
-            # TODO: update database
+        if employee_found and dept_found:
             transfered = Database.transfer_employee(emp_id, new_dept_id)
 
             if transfered:
-                index = Employee.find_emp_index(id)
-                Employee.employees[index].dept = new_dept_id
+                index = Employee.find_emp_index(emp_id)
+                Employee.employees[index].dept_id = new_dept_id
                 print('Employee is Transfered')
         else:
-            print('Employee or department id is not found!')
+            print('Employee or department id are not found!')
 
     @ staticmethod
     def fire(emp_id):
-        emp_found = Employee.employee_found(emp_id)
+        employee_found = Employee.employee_found(emp_id)
 
-        if emp_found:
+        if employee_found:
             # TODO: delete from database
             deleted = Database.delete_employee(emp_id)
 
             if deleted:
-                index = Employee.find_emp_index(id)
+                index = Employee.find_emp_index(emp_id)
                 del Employee.employees[index]
                 print("Employee successfully deleted")
         else:
             print("Employee id is not found")
 
-    @ classmethod
-    def show(cls, id):
-        index = Employee.find_emp_index(id)
+    @staticmethod
+    def show(id):
+        employee_found = Employee.employee_found(id)
 
-        if index != None:
+        if employee_found:
+            index = Employee.find_emp_index(id)
             print(Employee.employees[index])
         else:
             print("Employee id is not found!")
@@ -108,18 +125,18 @@ class Employee:
 
 
 class Manager(Employee):
-    def __init__(self, fname, lname, age, dept_id, salary, managed_dept):
-        super().__init__(fname, lname, age, dept_id, salary)
-        self.managed_dept = managed_dept
+    def __init__(self, fname, lname, age, dept_id, salary, managed_id, id=None):
+        id = id if id else uuid1().hex[:8]
+        super().__init__(fname, lname, age, salary, dept_id, managed_id, id)
 
     def __str__(self):
         return f"""
             ID:                 {self.id}
             Name:               {self.fname} {self.lname}
             Age:                {self.age}
-            Department:         {self.dept_id}
+            Department ID:      {self.dept_id}
             Salary:             confidential
-            Managed Department: {self.managed_dept}
+            Managed Department: {self.managed_id}
         """
 
 
@@ -127,27 +144,13 @@ class Department:
     # TODO: populate the list with data
     departments = []
 
-    def __init__(self, name, manager_id):
-        self.id = uuid1().hex
+    def __init__(self, name, id=None):
+        self.id = id if id else uuid1().hex[:8]
         self.name = name
-        self.manager_id = manager_id
 
-        manager_found = Employee.employee_found(manager_id)
+        Department.departments.append(self)
 
-        if manager_found:
-            inserted = Database.insert_department(
-                self.id,
-                self.name,
-                manager_id
-            )
-
-            if inserted:
-                Department.departments.append(self)
-                print("Department is inserted successfully!")
-        else:
-            print("Manger id is not found!")
-
-    @staticmethod
+    @ staticmethod
     def department_found(department_id):
         for dept in Department.departments:
             if dept.id == department_id:
@@ -155,17 +158,31 @@ class Department:
 
         return False
 
-    @staticmethod
+    @ staticmethod
     def list_all():
-        for dept in Department.departments:
-            print(dept)
+        if len(Department.departments):
+            for dept in Department.departments:
+                print(dept)
+        else:
+            print("No departments are found!")
 
     def __str__(self):
         return f"""
-            Department ID:          {self.id}
-            Department Name:        {self.name}
-            Department Manager ID:  {self.manager_id}
+            Department ID:      {self.id}
+            Department Name:    {self.name}
         """
+
+    @ staticmethod
+    def load_data():
+        departments_data = Database.get_all_departments()
+
+        for dept in departments_data:
+            Department(
+                dept[1],
+                dept[0]
+            )
+
+        print("Department Data loaded Successfully!")
 
 # print('Createing Objects')
 # emp1 = Employee('mah', 'met', 20, 'd1', 200)
@@ -195,3 +212,8 @@ class Department:
 
 # print('\nlist all employees')
 # Employee.list_employees()
+
+
+# mang = Manager('mah', 'met', 20, 'd1', 200, 'd3')
+# Manager.list_all()
+# Employee.list_all()

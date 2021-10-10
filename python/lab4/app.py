@@ -3,9 +3,8 @@ from Database import Database
 import yaml
 
 # TODO: Get data from yaml file
-stream = open("db_info.yml", 'r')
-data = yaml.load(stream)
-print(data)
+stream = open("./db_info.yml", 'r')
+data = yaml.load(stream, Loader=yaml.FullLoader)
 
 host = data['host']
 db_name = data['db_name']
@@ -15,6 +14,8 @@ password = data['password']
 Database(host, db_name, user, password)
 Database.connect()
 Database.initialize_db()
+Department.load_data()
+Employee.load_data()
 
 ans = 'y'
 
@@ -22,13 +23,14 @@ while ans.lower() == 'y':
     operation = input(
         '\nEnter Operation (add, transfer, fire, show_details, list_all): ')
 
+    operation = operation.lower()
     if operation == 'add':
         add_type = input('Enter d for department or e for employee: ')
 
         if add_type.lower() == 'd':
             dept_name = input('Name: ')
-            manager_id = input('Manager ID: ')
-            Department(dept_name, manager_id)
+            dpt = Department(dept_name)
+            Database.insert_department(dpt.id, dpt.name)
         elif add_type.lower() == 'e':
             fname = input('First Name: ')
             lname = input('Last Name: ')
@@ -37,12 +39,49 @@ while ans.lower() == 'y':
             salary = float(input('Salary: '))
             role = input('Role m for manager or e for employee: ')
             if role == 'e':
-                emp = Employee(fname, lname, age, dept_id, salary)
+                try:
+                    emp = Employee(
+                        fname=fname,
+                        lname=lname,
+                        age=age,
+                        salary=salary,
+                        dept_id=dept_id,
+                        managed_id=None
+                    )
+                    Database.insert_employee(
+                        id=emp.id,
+                        fname=emp.fname,
+                        lname=emp.lname,
+                        age=emp.age,
+                        salary=emp.salary,
+                        dept_id=emp.dept_id,
+                    )
+                except:
+                    print('Department is is not found\nOperation Failed!')
                 # print(f"Employee successfully added with id: {emp.id}")
             elif role == 'm':
-                managed_dept = input("Managed Department: ")
-                manger = Manager(fname, lname, age, dept_id,
-                                 salary, managed_dept)
+                managed_id = input("Managed Department ID: ")
+                try:
+                    manager = Manager(
+                        fname=fname,
+                        lname=lname,
+                        age=age,
+                        dept_id=dept_id,
+                        salary=salary,
+                        managed_id=managed_id
+                    )
+
+                    Database.insert_employee(
+                        id=manager.id,
+                        fname=manager.fname,
+                        lname=manager.lname,
+                        age=manager.age,
+                        salary=manager.salary,
+                        dept_id=manager.dept_id,
+                        managed_id=manager.managed_id
+                    )
+                except:
+                    print('Department is is not found\nOperation Failed!')
                 # print(f"Manager successfully added with id: {manger.id}")
             else:
                 print("Wrong role input")

@@ -1,11 +1,5 @@
 import psycopg2
 
-""" conn = psycopg2.connect(
-            host="localhost",
-            database="employees",
-            user="postgres",
-            password="112481632") """
-
 
 class Database:
     def __init__(self, host, db_name, user, password):
@@ -29,109 +23,144 @@ class Database:
     def initialize_db():
         Database.cur.execute('''
             CREATE TABLE IF NOT EXISTS employee (
-                id VARCHAR(32) PRIMARY KEY,
+                id CHAR(8) PRIMARY KEY,
                 fname VARCHAR(20) NOT NULL,
                 lname VARCHAR(20) NOT NULL,
                 age INT NOT NULL,
                 salary FLOAT NOT NULL,
-                dept_id VARCHAR(32)
+                dept_id CHAR(8),
+                managed_dept_id CHAR(8)
             );
         
             CREATE TABLE IF NOT EXISTS department (
-                id VARCHAR(32) PRIMARY KEY,
-                name VARCHAR(20) NOT NULL,
-                manager_id VARCHAR(32),
-                FOREIGN KEY (manager_id)
-                    REFERENCES employee(id)
+                id CHAR(8) PRIMARY KEY,
+                name VARCHAR(20) NOT NULL
             );
+        ''')
 
-            INSERT INTO employee(
-                id,
-                fname,
-                lname,
-                age,
-                salary,
-                dept_id
-            )
-            VALUES (
-                '0',
-                'Admin',
-                'Admin',
-                0,
-                0,
-                '0'
-            );
+        # Database.cur.execute("""
+        #     SELECT COUNT(*)
+        #     FROM employee;
+        # """)
 
-            INSERT INTO department (
-                id,
-                name,
-                manager_id
-            )
-            VALUES (
-                '0',
-                'dp1',
-                '0'
-            );
+        # if Database.cur.fetchone()[0] == 0:
+        #     Database.cur.execute('''
+        #         INSERT INTO employee(
+        #             id,
+        #             fname,
+        #             lname,
+        #             age,
+        #             salary,
+        #             dept_id
+        #         )
+        #         VALUES (
+        #             '0',
+        #             'Admin',
+        #             'Admin',
+        #             0,
+        #             0,
+        #             '0',
+        #             '0'
+        #         );
 
-            ALTER TABLE employee 
+        #         INSERT INTO department (
+        #             id,
+        #             name,
+        #         )
+        #         VALUES (
+        #             '0',
+        #             'dp1',
+        #         );
+        #     ''')
+        # else:
+        #     print('Data already found in tables')
+
+        Database.cur.execute('''
+            ALTER TABLE employee
             DROP CONSTRAINT IF EXISTS dept_id;
+
+            ALTER TABLE employee
+            DROP CONSTRAINT IF EXISTS managed_dept_id;
 
             ALTER TABLE employee
             ADD CONSTRAINT dept_id
             FOREIGN KEY (dept_id)
             REFERENCES department(id);
+
+            ALTER TABLE employee
+            ADD CONSTRAINT managed_dept_id
+            FOREIGN KEY (managed_dept_id)
+            REFERENCES department(id);
         ''')
 
         Database.conn.commit()
 
+    @staticmethod
     def close_connection():
         Database.cur.close()
 
     @staticmethod
-    def insert_employee(fname, lname, age, dept_id, salary):
-        Database.cur.execute(f'''
+    def insert_employee(id, fname, lname, age, salary, dept_id, managed_id=None):
+        if not managed_id:
+            Database.cur.execute(f'''
+                INSERT INTO employee (
+                    id,
+                    fname,
+                    lname,
+                    age,
+                    dept_id,
+                    salary
+                )
+                VALUES (
+                    '{id}',
+                    '{fname}',
+                    '{lname}',
+                    {age},
+                    '{dept_id}',
+                    {salary}
+                );
+            ''')
+        else:
+            Database.cur.execute(f'''
             INSERT INTO employee (
+                id,
                 fname,
                 lname,
                 age,
                 dept_id,
-                salary
+                salary,
+                managed_dept_id
             )
             VALUES (
-                {fname},
-                {lname},
+                '{id}',
+                '{fname}',
+                '{lname}',
                 {age},
-                {dept_id},
-                {salary}
+                '{dept_id}',
+                {salary},
+                '{managed_id}'
             );
         ''')
         Database.conn.commit()
-        return True
+        print(f"Employee is inserted with id = {id}")
 
     @staticmethod
-    def insert_department(id, name, manager_id):
-        Database.cur.execute(f'''
-            INSERT INTO department (
-                id,
-                name,
-                manager_id
-            )
-            VALUES (
-                {id},
-                {name},
-                {manager_id}
-            );
-        ''')
+    def insert_department(id, dp_name):
+        Database.cur.execute(f"""
+            INSERT INTO department (id, name)
+            VALUES ('{id}', '{dp_name}');
+        """)
+
         Database.conn.commit()
-        print("Department is inserted successfully!")
+        print(f"Department is inserted with id {id}")
         return True
 
     @staticmethod
     def transfer_employee(emp_id, dept_id):
         Database.cur.execute(f'''
             UPDATE employee
-            SET dept_id = {dept_id}
-            WHRERE id = {emp_id};
+            SET dept_id = '{dept_id}'
+            WHERE id = '{emp_id}';
         ''')
 
         Database.conn.commit()
@@ -141,11 +170,29 @@ class Database:
     def delete_employee(emp_id):
         Database.cur.execute(f'''
             DELETE FROM employee
-            WHERE id = {emp_id};
+            WHERE id = '{emp_id}';
         ''')
 
         Database.conn.commit()
         return True
+
+    @staticmethod
+    def get_all_employees():
+        Database.cur.execute("""
+            SELECT *
+            FROM employee;
+        """)
+
+        return Database.cur.fetchall()
+
+    @staticmethod
+    def get_all_departments():
+        Database.cur.execute("""
+            SELECT *
+            FROM department;
+        """)
+
+        return Database.cur.fetchall()
 
 
 # Database(
@@ -155,6 +202,8 @@ class Database:
 #     "112481632"
 # )
 # Database.connect()
-# Database.intialize_db()
+# Database.initialize_db()
+
+# Database.get_all_employees()
 
 # Database.insert_employee('i', 'f', 3, 3, 43)
