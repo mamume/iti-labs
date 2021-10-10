@@ -3,7 +3,7 @@ from Department import Department
 from Database import Database
 import yaml
 
-# TODO: Get data from yaml file
+# Get database configuration from yaml file
 stream = open("./db_info.yml", 'r')
 data = yaml.load(stream, Loader=yaml.FullLoader)
 
@@ -12,14 +12,17 @@ db_name = data['db_name']
 user = data['user']
 password = data['password']
 
+# Set configuration
 Database(host, db_name, user, password)
+# Connect to database
 Database.connect()
+# Initialize Database tables
 Database.initialize_db()
+# Load Database data into classes
 Department.load_data()
 Employee.load_data()
 
 ans = 'y'
-
 while ans.lower() == 'y':
     operation = input(
         '\nEnter Operation (add, transfer, fire, show_details, list_all): ')
@@ -32,12 +35,14 @@ while ans.lower() == 'y':
             dept_name = input('Name: ')
             dpt = Department(dept_name)
             Database.insert_department(dpt.id, dpt.name)
+
         elif add_type.lower() == 'e':
             fname = input('First Name: ')
             lname = input('Last Name: ')
             age = int(input('Age: '))
             dept_id = input('Department ID: ')
             salary = float(input('Salary: '))
+
             role = input('Role m for manager or e for employee: ')
             if role == 'e':
                 try:
@@ -59,7 +64,7 @@ while ans.lower() == 'y':
                     )
                 except:
                     print('Department is is not found\nOperation Failed!')
-                # print(f"Employee successfully added with id: {emp.id}")
+
             elif role == 'm':
                 managed_id = input("Managed Department ID: ")
                 try:
@@ -83,7 +88,6 @@ while ans.lower() == 'y':
                     )
                 except:
                     print('Department is is not found\nOperation Failed!')
-                # print(f"Manager successfully added with id: {manger.id}")
             else:
                 print("Wrong role input")
         else:
@@ -111,7 +115,6 @@ while ans.lower() == 'y':
             Employee.list_all()
         else:
             print('Invalid Input!')
-
     else:
         print("Invaild Operation!")
 

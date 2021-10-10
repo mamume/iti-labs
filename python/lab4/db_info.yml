@@ -1,5 +1,16 @@
-# Database Connection Data
+# Database Configuration
+
+# Create Your empty database
+# Then enter your configurations in this file
+
+# host default = localhost
 host: 'localhost'
-db_name: 'employees'
+
+# Empty database name
+db_name: 
+
+# Database user name (default = postgres)
 user: 'postgres'
-password: '112481632'
+
+# Database password
+password: 
