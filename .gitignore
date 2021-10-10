@@ -1,6 +1,5 @@
 .test.py
-python\lab4\__pycache__
-python/lab4/db_info.yml
-python/lab4/__pycache__
+.\python\lab4\__pycache__
+.\python/lab4/__pycache__
 .vscode
 .gitignore

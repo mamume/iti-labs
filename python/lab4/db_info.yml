@@ -1,0 +1,5 @@
+# Database Connection Data
+host: 'localhost'
+db_name: 'employees'
+user: 'postgres'
+password: '112481632'
