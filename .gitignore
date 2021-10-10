@@ -2,4 +2,4 @@
 .\python\lab4\__pycache__
 .\python/lab4/__pycache__
 .vscode
-.gitignore
+python/lab4/__pycache__
