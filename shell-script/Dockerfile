@@ -1,6 +1,7 @@
 FROM httpd:latest
 LABEL maintainer="mamume"
-RUN apt update && apt-get install -y --no-install-recommends apt-utils
+RUN apt update 
+RUN apt install -y --no-install-recommends apt-utils
 RUN apt -y install python3
 COPY hello.py /usr/local/apache2/cgi-bin
 COPY httpd.conf /usr/local/apache2/conf/httpd.conf
