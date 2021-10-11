@@ -1,6 +1,9 @@
 on:
         pull_request:
-                branches: [ main ]
+                branches: 
+                        - main
+                paths:
+                        - shell-script/**
 jobs:
  test:
   name: Run test
