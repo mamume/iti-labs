@@ -14,9 +14,10 @@ header {
 }
 
 aside {
-    float: left;
+    /* float: left; */
+    position: absolute;
     background-color: #2F4F4F;
-    height: 124.47vh;
+    /* height: calc(body(--variable-width)); */
 }
 
 aside ul {

@@ -105,6 +105,15 @@
     <footer>
         <h3>All Rights Reserved</h2>
     </footer>
+
+    <script>
+        const nav = document.querySelector('nav')
+        const section = document.querySelector('section')
+
+        console.log(nav.offsetHeight, section.offsetHeight)
+        nav.style.height = section.offsetHeight + 'px'
+        console.log(nav.offsetHeight, section.offsetHeight)
+    </script>
 </body>
 
 </html>
