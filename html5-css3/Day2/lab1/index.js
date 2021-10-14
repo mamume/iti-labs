@@ -1,12 +1,20 @@
 function insertPositionInDOM(position) {
-    const lat = document.querySelector('#lat')
-    const long = document.querySelector('#long')
-
-    lat.innerText = position.coords.latitude
-    long.innerText = position.coords.longitude
+    document.querySelector('body').innerHTML = `
+        <br />
+        <div>Latitude: ${position.coords.latitude}</div>
+        <div id="lat"></div>
+        <br />
+        <div>Longitude: ${position.coords.longitude}</div>
+        <div id="long"></div>`
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(insertPositionInDOM)
+    const btn = document.querySelector('#start-btn')
+
+    btn.addEventListener('click', () => {
+        if (navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(insertPositionInDOM)
+        else
+            alert('No Permission')
+    })
 })
