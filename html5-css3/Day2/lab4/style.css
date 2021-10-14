@@ -1,0 +1,18 @@
+canvas, video {
+    border: 1px solid black;
+}
+
+canvas {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 50%;
+}
+
+video {
+    width: 30%;
+}
+
+video[poster] {
+    object-fit: cover;
+}
