@@ -3,3 +3,5 @@
 .\python/lab4/__pycache__
 .vscode
 python/lab4/__pycache__
+.gitignore
+reactjs\lab1\counter\node_modules
