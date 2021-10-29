@@ -9,19 +9,19 @@ function PhoneBook() {
         {
             id: nextId(),
             name: 'Mahmoud',
-            address: 'Add1',
+            address: 'Addr1',
             pnumber: '0100200300'
         },
         {
             id: nextId(),
             name: 'Mustafa',
-            address: 'Add2',
+            address: 'Addr2',
             pnumber: '0100400500'
         },
         {
             id: nextId(),
             name: 'Metwally',
-            address: 'Add2',
+            address: 'Addr3',
             pnumber: '0100600700'
         }
     ])

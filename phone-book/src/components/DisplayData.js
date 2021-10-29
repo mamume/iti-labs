@@ -5,22 +5,23 @@ import { DataGrid } from '@mui/x-data-grid';
 
 function DisplayData(props) {
     const { contacts } = props
+    const conlumns = [
+        { field: 'name', headerName: 'Name', width: 170 },
+        { field: 'address', headerName: 'Address', width: 170 },
+        { field: 'pnumber', headerName: 'Phone Number', width: 200 }
+    ]
 
     return (
-        <Grid container justifyContent={'center'} >
-            <Grid item xs={3}>
-                Name
-            </Grid>
-            <Grid item xs={3}>
-                Name
-            </Grid>
-            <Grid item xs={3}>
-                Name
-            </Grid>
-            <Grid item xs={3}>
-                Name
-            </Grid>
-        </Grid >
+        <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+                rows={contacts}
+                columns={conlumns}
+                disableColumnFilter
+                disableColumnMenu
+                autoPageSize
+                disableSelectionOnClick
+            />
+        </div>
     );
 }
 
