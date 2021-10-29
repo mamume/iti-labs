@@ -40,18 +40,6 @@ function Todo() {
     }
 
     function addTodo(title) {
-        // todos.push({
-        //     id: nextId(),
-        //     title,
-        //     done: false
-        // })
-        // console.log(todos)
-        // console.log(todos.push({
-        //     id: nextId(),
-        //     title,
-        //     done: false
-        // }))
-
         setTodos(todos.concat({
             id: nextId(),
             title,
