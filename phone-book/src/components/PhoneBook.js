@@ -2,6 +2,7 @@ import { useState } from 'react';
 import nextId from 'react-id-generator'
 import Container from '@mui/material/Container';
 import DisplayData from './DisplayData'
+import Div from '@mui/material/Divider'
 
 function PhoneBook() {
     const [contacts, setContacts] = useState([
@@ -27,6 +28,7 @@ function PhoneBook() {
 
     return (
         <Container maxWidth="sm">
+            <Div><h1>Phone Book</h1></Div>
             <DisplayData contacts={contacts} />
         </Container>
     );
