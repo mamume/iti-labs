@@ -15,7 +15,7 @@ function TodoItem(props) {
                 <Checkbox checked={done} onClick={() => props.toggleDone(id)} />
             </ListItemIcon>
             <ListItemText primary={title} />
-            <DeleteIcon onClick={() => props.deleteTodo(id)} />
+            <DeleteIcon onClick={() => props.deleteTodo(id)} color="error" />
         </ListItem>
     );
 }

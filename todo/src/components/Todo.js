@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import nextId from "react-id-generator";
 import TodoItem from './TodoItem'
+import AddTodo from './AddTodo'
 
 
 function Todo() {
@@ -35,10 +36,27 @@ function Todo() {
     }
 
     function deleteTodo(id) {
-        console.log('hi')
-        const newTodos = todos.filter(todo => todo.id !== id)
-        console.log(newTodos)
-        setTodos(newTodos)
+        setTodos(todos.filter(todo => todo.id !== id))
+    }
+
+    function addTodo(title) {
+        // todos.push({
+        //     id: nextId(),
+        //     title,
+        //     done: false
+        // })
+        // console.log(todos)
+        // console.log(todos.push({
+        //     id: nextId(),
+        //     title,
+        //     done: false
+        // }))
+
+        setTodos(todos.concat({
+            id: nextId(),
+            title,
+            done: false
+        }))
     }
 
     return (
@@ -52,6 +70,8 @@ function Todo() {
                     deleteTodo={deleteTodo}
                 />
             ))}
+
+            <AddTodo addTodo={addTodo} />
         </Container>
     )
 }
