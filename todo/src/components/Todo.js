@@ -34,6 +34,13 @@ function Todo() {
         setTodos(newTodos)
     }
 
+    function deleteTodo(id) {
+        console.log('hi')
+        const newTodos = todos.filter(todo => todo.id !== id)
+        console.log(newTodos)
+        setTodos(newTodos)
+    }
+
     return (
         <Container maxWidth="sm">
             <h1>Todo List</h1>
@@ -42,6 +49,7 @@ function Todo() {
                     key={todo.id}
                     todo={todo}
                     toggleDone={toggleDone}
+                    deleteTodo={deleteTodo}
                 />
             ))}
         </Container>
