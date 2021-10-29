@@ -23,10 +23,27 @@ function Todo() {
         }
     ])
 
+    function toggleDone(id) {
+        const newTodos = todos.map(todo => {
+            if (todo.id === id)
+                todo.done = !todo.done
+
+            return todo
+        })
+
+        setTodos(newTodos)
+    }
+
     return (
         <Container maxWidth="sm">
             <h1>Todo List</h1>
-            {todos.map(todo => <TodoItem todo=todo />)}
+            {todos.map(todo => (
+                <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    toggleDone={toggleDone}
+                />
+            ))}
         </Container>
     )
 }
