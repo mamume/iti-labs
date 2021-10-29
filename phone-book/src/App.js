@@ -1,10 +1,9 @@
 import './App.css';
+import PhoneBook from './components/PhoneBook';
 
 function App() {
   return (
-    <div className="App">
-      Hello World
-    </div>
+    <PhoneBook />
   );
 }
 
