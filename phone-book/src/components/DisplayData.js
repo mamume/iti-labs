@@ -1,30 +1,11 @@
 import React, { Fragment } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import Grid from '@mui/material/Grid'
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function DisplayData(props) {
     const { contacts, deleteContact } = props
-    // const conlumns = [
-    //     { field: 'name', headerName: 'Name', width: 160 },
-    //     { field: 'address', headerName: 'Address', width: 160 },
-    //     { field: 'pnumber', headerName: 'Phone Number', width: 170 },
-    // ]
-
-    // console.log(contacts)
 
     return (
-        // <div style={{ height: 400, width: '100%' }}>
-        //     <DataGrid
-        //         rows={contacts}
-        //         columns={conlumns}
-        //         disableColumnFilter
-        //         disableColumnMenu
-        //         autoPageSize
-        //         disableSelectionOnClick
-        //     />
-        // </div>
-
         <Grid container spacing={2}>
             <Grid item xs={4} fontWeight='bold'>
                 Name
@@ -49,6 +30,7 @@ function DisplayData(props) {
                     </Grid>
                     <Grid item xs={1}>
                         <DeleteIcon
+                            fontSize='small'
                             color='error'
                             onClick={() => deleteContact(contact.id)}
                         />
