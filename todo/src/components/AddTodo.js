@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
+import { TextField, Button, Grid } from '@mui/material';
 
 
 function AddTodo(props) {

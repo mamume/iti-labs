@@ -1,8 +1,5 @@
 import React from 'react';
-import ListItem from '@mui/material/ListItem';
-import Checkbox from '@mui/material/Checkbox';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { ListItem, Checkbox, ListItemIcon, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
