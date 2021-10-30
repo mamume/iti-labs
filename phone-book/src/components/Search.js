@@ -6,10 +6,6 @@ function Search(props) {
     const [query, setQuery] = useState('')
     const [searchType, setSearchType] = useState('')
 
-    // function querySearch(e) {
-    //     setQuery(e.target.value)
-    // }
-
     useEffect(() => {
         props.querySearch(query.toLowerCase(), searchType)
     }, [query, searchType])

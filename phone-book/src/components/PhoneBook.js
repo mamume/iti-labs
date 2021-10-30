@@ -33,6 +33,7 @@ function PhoneBook() {
 
     function deleteContact(id) {
         setContacts(contacts => contacts.filter(contact => contact.id !== id))
+        setSearch(false)
     }
 
     function addContact(contact) {
