@@ -64,10 +64,6 @@ function PhoneBook() {
         }
     }
 
-    useEffect(() => {
-
-    }, [setSearch])
-
     return (
         <Container maxWidth="sm">
             <Div><h1>Phone Book</h1></Div>

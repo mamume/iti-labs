@@ -39,9 +39,7 @@ function Search(props) {
                         <MenuItem value="pnumber">Phone Number</MenuItem>
                     </Select>
                 </FormControl>
-
             </Grid>
-
         </Grid >
     );
 }
