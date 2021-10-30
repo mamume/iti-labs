@@ -87,9 +87,15 @@ function AddContact(props) {
                         />
                     </Grid>
 
-                    <Grid item xs={12} mt={2} alignSelf='right'>
-                        <Button onClick={addContact} variant="contained">
+                    <Grid item xs='auto' mt={2} mx='auto'>
+                        <Button onClick={addContact} variant="contained" size='small'>
                             Add
+                        </Button>
+                        <Button color='warning' onClick={() => clearInputs()} variant="contained" size='small'>
+                            Reset
+                        </Button>
+                        <Button color='error' onClick={() => setOpen(false)} variant="contained" size='small'>
+                            Close
                         </Button>
                     </Grid>
                 </Grid>
