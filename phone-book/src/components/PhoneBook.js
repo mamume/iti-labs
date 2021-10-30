@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import nextId from 'react-id-generator'
 import Container from '@mui/material/Container';
 import DisplayData from './DisplayData'
