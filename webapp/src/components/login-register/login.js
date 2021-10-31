@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LoginBtn from "./LoginBtn";
+import { Link } from 'react-router-dom'
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -66,7 +67,7 @@ function Login() {
             <button type="submit" className="btn btn-primary w-100" id='submit-btn' onClick={handleLogin}>Submit</button>
 
             <div className="form-text mt-lg-3">
-                No account yet? <a href="./register.html">Register Here</a>
+                No account yet? <Link to="/Register">Register Here</Link>
             </div>
         </form>
     );

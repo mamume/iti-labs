@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import NavItem from './NavItem';
 
 
@@ -11,9 +10,7 @@ function Nav() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            {/* <Link to='/todo'> */}
                             <NavItem title="ToDo" />
-                            {/* </Link> */}
                         </li>
                         <li className="nav-item">
                             <NavItem href="#phone-book" title="Phone Book" />
