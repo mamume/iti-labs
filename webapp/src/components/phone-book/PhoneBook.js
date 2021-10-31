@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import nextId from 'react-id-generator'
 import Container from '@mui/material/Container';
 import DisplayData from './DisplayData'
@@ -7,29 +7,36 @@ import AddContact from './AddContact';
 import Search from './Search';
 
 function PhoneBook() {
-    const [contacts, setContacts] = useState([
-        {
-            id: nextId(),
-            name: 'Mahmoud',
-            address: 'Addr1',
-            pnumber: '0100200300'
-        },
-        {
-            id: nextId(),
-            name: 'Mustafa',
-            address: 'Addr2',
-            pnumber: '0100400500'
-        },
-        {
-            id: nextId(),
-            name: 'Metwally',
-            address: 'Addr3',
-            pnumber: '0100600700'
-        }
-    ])
+    if (!localStorage.getItem('contacts')) {
+        localStorage.setItem('contacts', JSON.stringify([
+            {
+                id: nextId(),
+                name: 'Mahmoud',
+                address: 'Addr1',
+                pnumber: '0100200300'
+            },
+            {
+                id: nextId(),
+                name: 'Mustafa',
+                address: 'Addr2',
+                pnumber: '0100400500'
+            },
+            {
+                id: nextId(),
+                name: 'Metwally',
+                address: 'Addr3',
+                pnumber: '0100600700'
+            }
+        ]))
+    }
+
+    const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('contacts')))
     const [searchResult, setSearchResult] = useState(contacts)
     const [search, setSearch] = useState(false)
 
+    useEffect(() => {
+        localStorage.setItem('contacts', JSON.stringify(contacts))
+    }, [contacts])
 
     function deleteContact(id) {
         setContacts(contacts => contacts.filter(contact => contact.id !== id))
