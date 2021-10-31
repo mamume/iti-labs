@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom';
+
+
 function NavItem(props) {
-    const { href, title } = props
+    const { title } = props
 
     return (
-        <a className="nav-link" aria-current="page" href={href}>{title}</a>
+        <Link className="nav-link" to={`/${title.replace(/\s/g, '')}`}>
+            {title}
+        </Link>
     );
 }
 
