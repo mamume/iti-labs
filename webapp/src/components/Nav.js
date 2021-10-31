@@ -17,6 +17,9 @@ function Nav() {
                             <NavItem href="#todo" title="ToDo" />
                         </li>
                         <li className="nav-item">
+                            <NavItem href="#phone-book" title="Phone Book" />
+                        </li>
+                        <li className="nav-item">
                             <NavItem href="./login.html" title="Login" />
                         </li>
                         <li className="nav-item">
