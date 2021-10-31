@@ -1,0 +1,19 @@
+body {
+  background-color: #212529;
+}
+
+#gallery {
+  background-color: whitesmoke;
+}
+
+#img-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.zoom:hover {
+  transition: transform 0.2s;
+  transform: scale(1.5);
+  z-index: 10;
+}
