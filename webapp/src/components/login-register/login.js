@@ -18,7 +18,7 @@ function Login() {
             setMessage('Email is required!')
         else if (!password)
             setMessage('Password is required!')
-        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+        else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email))
             setMessage('Invalid Email!')
         else
             fetch('https://reqres.in/api/login', {
