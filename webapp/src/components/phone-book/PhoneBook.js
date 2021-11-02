@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import nextId from 'react-id-generator'
 import Container from '@mui/material/Container';
 import DisplayData from './DisplayData'
 import Div from '@mui/material/Divider'
 import AddContact from './AddContact';
 import Search from './Search';
+import { Redirect } from 'react-router';
 
-function PhoneBook() {
+function PhoneBook(props) {
     if (!localStorage.getItem('contacts')) {
         localStorage.setItem('contacts', JSON.stringify([
             {
@@ -72,15 +73,20 @@ function PhoneBook() {
     }
 
     return (
-        <Container maxWidth="sm">
-            <Div><h1>Phone Book</h1></Div>
-            <Search querySearch={querySearch} />
-            <DisplayData
-                contacts={search ? searchResult : contacts}
-                deleteContact={deleteContact}
-            />
-            <AddContact addContact={addContact} />
-        </Container>
+        <Fragment>
+            {props.authedUser
+                ? <Container maxWidth="sm">
+                    < Div > <h1>Phone Book</h1></Div >
+                    <Search querySearch={querySearch} />
+                    <DisplayData
+                        contacts={search ? searchResult : contacts}
+                        deleteContact={deleteContact}
+                    />
+                    <AddContact addContact={addContact} />
+                </Container >
+                : <Redirect to='/' />
+            }
+        </Fragment>
     );
 }
 

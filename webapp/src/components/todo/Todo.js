@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import nextId from "react-id-generator";
 import TodoItem from './TodoItem'
 import AddTodo from './AddTodo'
+import { Redirect } from 'react-router';
 
 
-function Todo() {
+function Todo(props) {
     useEffect(() => {
         if (!localStorage.getItem('todo')) {
             localStorage.setItem('todos', JSON.stringify([
@@ -59,19 +60,24 @@ function Todo() {
     }
 
     return (
-        <Container maxWidth="sm">
-            <h1>Todo List</h1>
-            {todos.map(todo => (
-                <TodoItem
-                    key={todo.id}
-                    todo={todo}
-                    toggleDone={toggleDone}
-                    deleteTodo={deleteTodo}
-                />
-            ))}
+        <Fragment>
+            {props.authedUser
+                ? <Container maxWidth="sm">
+                    <h1>Todo List</h1>
+                    {todos.map(todo => (
+                        <TodoItem
+                            key={todo.id}
+                            todo={todo}
+                            toggleDone={toggleDone}
+                            deleteTodo={deleteTodo}
+                        />
+                    ))}
 
-            <AddTodo addTodo={addTodo} />
-        </Container>
+                    <AddTodo addTodo={addTodo} />
+                </Container>
+                : <Redirect to='/' />}
+        </Fragment>
+
     )
 }
 

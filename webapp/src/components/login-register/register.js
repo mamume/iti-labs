@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import LoginBtn from "./LoginBtn";
 
-function Register() {
+function Register(props) {
     const [registerData, setRegisterData] = useState({
         username: '',
         password: '',
@@ -49,6 +49,7 @@ function Register() {
             setAlertMessage('You must accept our terms!')
         else {
             setAlertMessage('Register Succeeded!')
+            props.setAuthedUser(true)
             setRedirect(true)
         }
     }
@@ -56,7 +57,7 @@ function Register() {
     return (
         <Fragment>
             <h3 className="text-center mt-sm-4 mb-4">Create Your Account</h3>
-            {redirect
+            {redirect || props.authedUser
                 ? <Redirect to='/Todo' />
                 : <table className="table table-borderless">
                     <tbody>

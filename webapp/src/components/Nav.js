@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NavItem from './NavItem';
 
 
-function Nav() {
+function Nav(props) {
+    function logout() {
+        props.setAuthedUser(false)
+    }
+
     return (
         // Navigation Bar
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-spa">
             <div className="container-fluid">
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <NavItem title="ToDo" />
-                        </li>
-                        <li className="nav-item">
-                            <NavItem href="#phone-book" title="Phone Book" />
-                        </li>
-                        <li className="nav-item">
-                            <NavItem href="./login.html" title="Login" />
-                        </li>
-                        <li className="nav-item">
-                            <NavItem href="./register.html" title="Register" />
-                        </li>
+                        {props.authedUser
+                            ? <Fragment>
+                                <li className="nav-item">
+                                    <NavItem title="ToDo" />
+                                </li>
+                                <li className="nav-item">
+                                    <NavItem title="Phone Book" />
+                                </li>
+                                <li className="nav-item" onClick={logout}>
+                                    <NavItem title="Logout" />
+                                </li>
+                            </Fragment>
+                            : <Fragment>
+                                <li className="nav-item">
+                                    <NavItem title="Login" />
+                                </li>
+                                <li className="nav-item">
+                                    <NavItem title="Register" />
+                                </li>
+                            </Fragment>}
                     </ul>
                 </div>
             </div>

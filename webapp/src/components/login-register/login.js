@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import LoginBtn from "./LoginBtn";
 import { Link, Redirect } from 'react-router-dom'
 
-function Login() {
+function Login(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [token, setToken] = useState('')
@@ -33,11 +33,14 @@ function Login() {
             })
                 .then(request => request.json())
                 .then(data => {
-                    if (data.error)
+                    if (data.error) {
                         setMessage(data.error)
+                        props.setAuthedUser(false)
+                    }
                     else {
                         setMessage(`Login is Successful. Token: ${data.token}`)
                         setTimeout(setToken(data.token), 10000)
+                        props.setAuthedUser(true)
                     }
                 })
     }
@@ -45,7 +48,7 @@ function Login() {
 
     return (
         <Fragment>
-            {token
+            {token || props.authedUser
                 ? <Redirect to="/Todo" />
                 : // Login Form
                 <form className="p-4 border mx-auto mt-lg-5 rounded container w-50">
