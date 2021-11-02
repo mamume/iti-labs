@@ -19,7 +19,7 @@ function Login() {
         else if (!password)
             setMessage('Password is required!')
         else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
-            setMessage('Email is invalid!')
+            setMessage('Invalid Email!')
         else
             fetch('https://reqres.in/api/login', {
                 method: 'POST',
@@ -36,7 +36,7 @@ function Login() {
                     if (data.error)
                         setMessage(data.error)
                     else
-                        setMessage(`Login is Successful\nToken: ${data.token}`)
+                        setMessage(`Login is Successful. Token: ${data.token}`)
                 })
     }
 
@@ -45,9 +45,10 @@ function Login() {
         // Login Form
         <form className="p-4 border mx-auto mt-lg-5 rounded container w-50">
             {/* Alert Message Div */}
-            <div id='alert-message' className="text-center" color='error'>
-                {message}
-            </div>
+            {message &&
+                <div id='alert-message' className="text-center alert alert-primary" role="alert">
+                    {message}
+                </div>}
 
             {/* Login by Facebook or Google buttons */}
             <div className="d-grid gap-2">
