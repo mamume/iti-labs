@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [token, setToken] = useState('')
+    // const [token, setToken] = useState('')
+    const [message, setMessage] = useState('')
 
     // "email": "eve.holt@reqres.in",
     // "password": "cityslicka"
@@ -13,23 +14,30 @@ function Login() {
     function handleLogin(e) {
         e.preventDefault()
 
-        fetch('https://reqres.in/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                password
-            }),
-        })
-            .then(request => request.json())
-            .then(data => {
-                if (data.error)
-                    setToken(data.error)
-                else
-                    setToken(data.token)
+        if (!email)
+            setMessage('Email is required!')
+        else if (!password)
+            setMessage('Password is required!')
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+            setMessage('Email is invalid!')
+        else
+            fetch('https://reqres.in/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
             })
+                .then(request => request.json())
+                .then(data => {
+                    if (data.error)
+                        setMessage(data.error)
+                    else
+                        setMessage(`Login is Successful\nToken: ${data.token}`)
+                })
     }
 
 
@@ -37,9 +45,8 @@ function Login() {
         // Login Form
         <form className="p-4 border mx-auto mt-lg-5 rounded container w-50">
             {/* Alert Message Div */}
-            <div id='alert-message' className="text-center">
-                {/* message */}
-                {token}
+            <div id='alert-message' className="text-center" color='error'>
+                {message}
             </div>
 
             {/* Login by Facebook or Google buttons */}
