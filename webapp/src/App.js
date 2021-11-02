@@ -10,10 +10,10 @@ function App() {
   return (
     <Router>
       <Nav />
-      <Route path='/login' component={Login} />
       <Route path='/Register' component={Register} />
       <Route path='/Todo' component={Todo} />
       <Route path='/PhoneBook' component={PhoneBook} />
+      <Route path='/' component={Login} />
     </Router>
   );
 }
