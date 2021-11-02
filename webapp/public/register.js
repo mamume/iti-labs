@@ -19,7 +19,7 @@ function login(e) {
     if (!username.val() || !email.val() || !password.val() || !confirmPassword.val())
         alertMsg.text('All Fields are required')
     // Email Validation
-    else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.val()))
+    else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email.val()))
         alertMsg.text('Email is invalid!')
     // Check for password matching
     else if (password.val() !== confirmPassword.val())
