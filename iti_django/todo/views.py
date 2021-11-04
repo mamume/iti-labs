@@ -49,3 +49,6 @@ def delete(request, todo_id):
             todos.remove(todo)
 
     return redirect('/todo')
+
+def movies(request):
+    return render(request, 'movies.html')

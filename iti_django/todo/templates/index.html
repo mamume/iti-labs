@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load get_data %}
 
 {% block title %}
 Home
@@ -25,7 +26,7 @@ Home
             <td>{{ todo.description }}</td>
             <td>
                 <a href="{% url 'todo:view' todo_id=todo.id %}" class="btn btn-primary">View</a>
-                <a href="{% url 'todo:edit' todo_id=todo.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'todo:edit' todo_id=todo.id %}" class="btn btn-success">Update</a>
                 <a href="{% url 'todo:delete' todo_id=todo.id %}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
