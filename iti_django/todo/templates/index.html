@@ -6,5 +6,30 @@ Home
 
 
 {% block body %}
-Test index
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for todo in todos %}
+        <tr>
+            <th scope="row">{{ todo.id }}</th>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.priority }}</td>
+            <td>{{ todo.description }}</td>
+            <td>
+                <a href="{% url 'todo:view' todo_id=todo.id %}" class="btn btn-primary">View</a>
+                <a href="{% url 'todo:edit' todo_id=todo.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'todo:delete' todo_id=todo.id %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
