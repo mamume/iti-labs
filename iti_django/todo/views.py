@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 todos = [
@@ -29,13 +29,23 @@ def index(request):
 
 
 def view(request, todo_id):
+    todo = filter(lambda todo: todo.get('id') == todo_id, todos)
 
-
-    return render(request, 'index.html', context={"todos":todos})
+    return render(request, 'index.html', context={"todos":todo})
 
 
 def edit(request, todo_id):
-    pass
+    for index in range(len(todos)):
+        if todos[index].get('id') == todo_id:
+            todos[index]['description'] = "[UPDATED] " + todos[index]['description']
+            break
+    
+    return redirect('/todo')
+
 
 def delete(request, todo_id):
-    pass
+    for todo in todos:
+        if todo.get('id') == todo_id:
+            todos.remove(todo)
+
+    return redirect('/todo')
