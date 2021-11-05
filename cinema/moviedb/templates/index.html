@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col">Actors</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movie in movies %}
+        <tr>
+            <td>{{ movie.id }}</td>
+            <td>{{ movie.name }}</td>
+            <td>{{ movie.description }}</td>
+            <td>{% for cat in movie.category.all %}
+                {{cat}}
+                {% endfor %}
+            </td>
+            <td>
+                {% for actor in movie.cast.all %}
+                {{ actor }}
+                {% endfor %}
+            </td>
+            <td>{{ movie.rating }}</td>
+            <td>
+                <a href="{% url 'moviedb:view' id=movie.id %}" class="btn btn-primary">View</a>
+                <a href="{% url 'moviedb:edit' id=movie.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'moviedb:delete' id=movie.id %}" class="btn btn-danger">Delete</a>
+            </td>
+            {% empty %}
+            <td>No Movies Found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'moviedb:create_movie' %}" class="btn btn-success">Add</a>
+
+{% endblock %}
