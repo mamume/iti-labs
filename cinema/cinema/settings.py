@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'moviedb',
+    'moviedb.apps.MoviedbConfig',
     'account',
 ]
 
@@ -140,3 +140,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media_root')
 LOGIN_REDIRECT_URL = '/moviedb/'
 LOGIN_URL = '/account/login/'
 LOGOUT_REDIRECT_URL = '/moviedb/'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
