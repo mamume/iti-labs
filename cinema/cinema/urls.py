@@ -19,7 +19,9 @@ from cinema import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('moviedb/', include('moviedb.urls'))
+    path('moviedb/', include('moviedb.urls')),
+    path('account/', include('account.urls')),
+    path('account/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
