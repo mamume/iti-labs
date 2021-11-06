@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -17,6 +18,6 @@ class Actor(models.Model):
 class Movie(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(verbose_name='Movie Description', null=True, blank=True)
-    rating = models.IntegerField(default=0, null=True, blank=True)
+    rating = models.IntegerField(default=0, null=True, blank=True, validators=[MaxValueValidator(10)])
     category = models.ManyToManyField(Category)
     cast = models.ManyToManyField(Actor)
