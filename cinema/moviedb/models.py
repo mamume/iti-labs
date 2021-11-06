@@ -36,3 +36,4 @@ class Movie(models.Model):
     category = models.ManyToManyField(Category)
     cast = models.ManyToManyField(Actor)
     director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True, blank=True)
+    poster = models.ImageField(upload_to='movie/posters', null=True, blank=True)

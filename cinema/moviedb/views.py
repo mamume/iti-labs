@@ -13,7 +13,7 @@ def index(request):
 def create_movie(request):
     form = MovieForm()
     if request.method == 'POST':
-            form = MovieForm(request.POST)
+            form = MovieForm(request.POST, files=request.FILES)
 
             if form.is_valid():
                 form.save()
@@ -33,7 +33,7 @@ def edit_movie(request, id):
     form = MovieForm(instance=movie)
 
     if request.method == 'POST':
-        form = MovieForm(data=request.POST, instance=movie)
+        form = MovieForm(data=request.POST, instance=movie, files=request.FILES)
         if form.is_valid():
             form.save()
             return redirect('moviedb:index')

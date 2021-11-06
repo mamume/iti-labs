@@ -12,6 +12,7 @@
             <th scope="col">Category</th>
             <th scope="col">Actors</th>
             <th scope="col">Rating</th>
+            <th scope="col">Poster</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -31,6 +32,11 @@
                 {% endfor %}
             </td>
             <td>{{ movie.rating }}</td>
+            <td>
+                {% if movie.poster %}
+                <img src="{{ movie.poster.url }}" />
+                {% endif %}
+            </td>
             <td>
                 <a href="{% url 'moviedb:view' id=movie.id %}" class="btn btn-primary">View</a>
                 <a href="{% url 'moviedb:edit' id=movie.id %}" class="btn btn-warning">Edit</a>
