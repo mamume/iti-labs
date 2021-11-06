@@ -9,7 +9,7 @@ def send_on_save(sender, instance, created, *args, **kwargs):
         send_mail(
             f'Movie {instance.name} Added',
             f'Hi, Movie {instance.name} has been added to our website',
-            'neobux978@yahoo.com',
-            ['exampleigneous@gmail.com'],
+            'sender@example.com',
+            ['receiver@example.com'],
             fail_silently=False
             )
