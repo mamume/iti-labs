@@ -27,3 +27,29 @@ def movies_details(request):
     serialized_movies = MovieSerializer(instance=all_movies, many=True)
 
     return Response(data=serialized_movies.data, status=status.HTTP_200_OK)
+
+@api_view(["PATCH", "PUT"])
+def update_movie(request, id):
+    response ={}
+
+    try:
+        movie = Movie.objects.get(pk=id)
+
+        if request.method == 'PUT':
+            serialized_movie = MovieSerializer(instance=movie, data=request.data)
+        else:
+            serialized_movie = MovieSerializer(instance=movie, data=request.data, partial=True)
+
+        if serialized_movie.is_valid():
+            serialized_movie.save()
+            response['data'] = serialized_movie.data
+            response['status'] = status.HTTP_200_OK
+        else:
+            response['data'] = serialized_movie.error
+            response['status'] = status.HTTP_400_BAD_REQUEST
+
+    except Exception as e:
+        response['data'] = {'message': str(e)}
+        response['status'] = status.HTTP_400_BAD_REQUEST
+
+    return Response(**response)
