@@ -1,13 +1,13 @@
 from django.db import models
 
 # Create your models here.
-class Meta(models.Model):
+class MediaMeta(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
     release_date = models.DateField()
-    categories = models.ManyToManyField('Category')
-    casts = models.ManyToManyField('Actor')
-    poster_image = models.ImageField()
+    categories = models.ManyToManyField('Category', null=True, blank=True)
+    casts = models.ManyToManyField('Actor', null=True, blank=True)
+    poster_image = models.ImageField(upload_to='posters')
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -22,8 +22,8 @@ class Actor(models.Model):
     def __str__(self):
         return self.name
 
-class Movie(Meta):
+class Movie(MediaMeta):
     pass
 
-class Serie(Meta):
+class Serie(MediaMeta):
     num_of_eposides = models.IntegerField()
