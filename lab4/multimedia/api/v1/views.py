@@ -53,3 +53,19 @@ def update_movie(request, id):
         response['status'] = status.HTTP_400_BAD_REQUEST
 
     return Response(**response)
+
+@api_view(['DELETE'])
+def delete_movie(request, id):
+    response = {}
+
+    try:
+        movie = Movie.objects.get(pk=id)
+        movie.delete()
+
+        response['data'] = {'message': f'movie with id={id} was deleted successfully'}
+        response['status'] = status.HTTP_200_OK
+    except Exception as e:
+        response['data'] = {'message': f'Error: {str(e)}'}
+        response['status'] = status.HTTP_400_BAD_REQUEST
+
+    return Response(**response)
