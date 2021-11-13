@@ -44,3 +44,10 @@ def signup(request):
         response['status'] = status.HTTP_400_BAD_REQUEST
 
     return Response(**response)
+
+
+@api_view(['GET'])
+def logout(request):
+    Token.objects.get(user__username=request.user).delete()
+
+    return Response(data={"message": "User logout out"}, status=status.HTTP_200_OK)
