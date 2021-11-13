@@ -19,9 +19,11 @@ from lab4 import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('multimedia/', include('multimedia.api.v1.urls'))
+    path('multimedia/', include('multimedia.api.v1.urls')),
+    path('account/', include('account.api.v1.urls'))
 ]
 
 if settings.DEBUG:
     from django.conf.urls.static import static
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
