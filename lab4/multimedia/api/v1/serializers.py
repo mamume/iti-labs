@@ -13,10 +13,11 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['name']
 
+
 class MovieSerializer(serializers.ModelSerializer):
     # casts = ActorSerializer('casts', many=True)
     # categories = CategorySerializer('categories', many=True)
-    
+
     class Meta:
         model = Movie
         fields = ('__all__')
@@ -30,9 +31,8 @@ class MovieSerializer(serializers.ModelSerializer):
     #         name += actor.name + ' '
     #     return name
 
+
 class SerieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Serie
         fields = '__all__'
-
-
