@@ -1,0 +1,347 @@
+{
+	"info": {
+		"_postman_id": "3154854c-b759-4531-8c94-41b822766181",
+		"name": "Multimedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "poster_image",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "title",
+							"value": "movie title",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "movie description",
+							"type": "text"
+						},
+						{
+							"key": "release_date",
+							"value": "2020-02-20",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/multimedia/create",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"multimedia",
+						"create"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "movie title",
+							"disabled": true
+						},
+						{
+							"key": "description",
+							"value": "movie description",
+							"disabled": true
+						},
+						{
+							"key": "release_date",
+							"value": "2020-02-02",
+							"disabled": true
+						},
+						{
+							"key": "poster_image",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "127.0.0.1:8000/multimedia/create"
+			},
+			"response": []
+		},
+		{
+			"name": "List Movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8000/multimedia/details",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"multimedia",
+						"details"
+					]
+				},
+				"description": "127.0.0.1:8000/multimedia/details"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "title",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "new description",
+							"type": "text"
+						},
+						{
+							"key": "release_date",
+							"value": "2020-02-02",
+							"type": "text"
+						},
+						{
+							"key": "poster_image",
+							"type": "file",
+							"src": "/home/mamume/Desktop/download.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/multimedia/update/1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"multimedia",
+						"update",
+						"1"
+					]
+				},
+				"description": "Update Movie (PUT)"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Movie",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "title2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/multimedia/update/1",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"multimedia",
+						"update",
+						"1"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "title2",
+							"disabled": true
+						}
+					]
+				},
+				"description": "127.0.0.1:8000/multimedia/update/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Movie",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8000/multimedia/delete/0",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"multimedia",
+						"delete",
+						"0"
+					]
+				},
+				"description": "127.0.0.1:8000/multimedia/delete/0"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "admin@admin.com",
+							"type": "text"
+						},
+						{
+							"key": "password_confirm",
+							"value": "pass",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/account/signup",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"signup"
+					]
+				},
+				"description": "127.0.0.1:8000/account/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "admin@admin.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/account/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "user1",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "admin@admin.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"disabled": true
+						}
+					]
+				},
+				"description": "127.0.0.1:8000/account/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8000/account/logout",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"account",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
