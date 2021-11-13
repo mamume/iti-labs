@@ -6,6 +6,15 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSerializer
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import BasePermission
+
+
+class DeleteMovie(BasePermission):
+    def has_permission(self, request, view):
+        if request.user.groups.filter(name='DeleteMovie').exists():
+            return True
+        else:
+            return False
 
 
 @api_view(['GET'])

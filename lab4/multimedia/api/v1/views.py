@@ -1,8 +1,10 @@
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from .serializers import MovieSerializer
 from multimedia.models import Movie
+from account.api.v1.views import DeleteMovie
+
 
 @api_view(["POST"])
 def create_movie(request):
@@ -21,6 +23,7 @@ def create_movie(request):
     else:
         return Response(data=serialized_movie.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(["GET"])
 def movies_details(request):
     all_movies = Movie.objects.all()
@@ -28,17 +31,20 @@ def movies_details(request):
 
     return Response(data=serialized_movies.data, status=status.HTTP_200_OK)
 
+
 @api_view(["PATCH", "PUT"])
 def update_movie(request, id):
-    response ={}
+    response = {}
 
     try:
         movie = Movie.objects.get(pk=id)
 
         if request.method == 'PUT':
-            serialized_movie = MovieSerializer(instance=movie, data=request.data)
+            serialized_movie = MovieSerializer(
+                instance=movie, data=request.data)
         else:
-            serialized_movie = MovieSerializer(instance=movie, data=request.data, partial=True)
+            serialized_movie = MovieSerializer(
+                instance=movie, data=request.data, partial=True)
 
         if serialized_movie.is_valid():
             serialized_movie.save()
@@ -54,7 +60,9 @@ def update_movie(request, id):
 
     return Response(**response)
 
+
 @api_view(['DELETE'])
+@permission_classes([DeleteMovie])
 def delete_movie(request, id):
     response = {}
 
@@ -62,7 +70,8 @@ def delete_movie(request, id):
         movie = Movie.objects.get(pk=id)
         movie.delete()
 
-        response['data'] = {'message': f'movie with id={id} was deleted successfully'}
+        response['data'] = {
+            'message': f'movie with id={id} was deleted successfully'}
         response['status'] = status.HTTP_200_OK
     except Exception as e:
         response['data'] = {'message': f'Error: {str(e)}'}
