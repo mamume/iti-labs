@@ -41,4 +41,24 @@ class TodoRUD(Resource):
         return {'response': f'todo with id={id} is deleted successfully'}
 
 
-todo_app.run(DEBUG=True)
+class TodoLC(Resource):
+    def get(self):
+        try:
+            todos = Todo.query.all()
+            print(todos)
+        except Exception:
+            abort(500, message=f"Internal Server Error {Exception}")
+
+
+todo_api.add_resource(TodoLC, '/api/v1/todo')
+todo_api.add_resource(TodoRUD, '/api/v1/todo/<int:id>')
+
+db.init_app(todo_app)
+
+
+@todo_app.before_first_request
+def initiate_data_base_tables():
+    db.create_all()
+
+
+todo_app.run(debug=True)
