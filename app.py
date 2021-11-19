@@ -11,7 +11,7 @@ todo_api = Api(todo_app)
 
 
 class TodoRUD(Resource):
-    def get(selr, **kwargs):
+    def get(self, **kwargs):
         todo_id = kwargs.get('todo_id')
         task = Todo.query.get(todo_id)
 
@@ -20,9 +20,9 @@ class TodoRUD(Resource):
 
         data = {
             'id': task.id,
-            'name': task.name,
-            'priority': task.priority,
+            'title': task.title,
             'description': task.description,
+            'priority': task.priority,
             'finished': task.finished
         }
 

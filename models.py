@@ -6,10 +6,10 @@ db = SQLAlchemy()
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(125), nullable=False)
-    priority = db.Column(db.Integer)
+    title = db.Column(db.String(256), nullable=False)
     description = db.Column(db.Text)
-    finished = db.Column(db.Boolean)
+    priority = db.Column(db.Integer)
+    completed = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime)
 
     def __init__(self, *args, **kwargs):
