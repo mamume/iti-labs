@@ -131,6 +131,27 @@
 				"description": "localhost:5000/api/v1/todo/2"
 			},
 			"response": []
+		},
+		{
+			"name": "Retrieve Todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/v1/todo/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"todo",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
